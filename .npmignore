@@ -1,0 +1,8 @@
+# ignoring files (also ignore .d.ts files since this is a bin package only)
+
+*.ts
+*.js.map
+*.d.ts
+
+# to include the .d.ts files
+# !*.d.ts

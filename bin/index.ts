@@ -26,11 +26,15 @@
 @note Updates :
 
 */
-import { readFileSync } from "fs";
-import { resolve } from "path"
+import {readFileSync} from "fs";
+import {resolve} from "path";
+import {spawn} from "child_process";
 
 // reading package.json file
 const pckjson = JSON.parse(readFileSync(resolve(__dirname, "..", "package.json"), 'utf-8'));
+
+// tilde git url
+const tilde = "git://github.com/dawnimpulse/tilde";
 
 // various color codes without using libraries
 const reset = "\x1b[0m";
@@ -45,25 +49,58 @@ const cyan = "\x1b[36m";
 const args = [];
 process.argv.forEach((el, i) => {
     if (i > 1)
-        args.push(el)
+        args.push(el.toLowerCase())
 });
 
-// we are not looking for any extra param
-// throw an error here
-if (args[1] !== undefined)
-    console.log(red + "Arguments not accepted" + reset);
-else {
-    // parsing valid arguments
-    switch ((args[0] as string).toLowerCase()) {
-        case "version":
-        case "--version":
-        case "-v": {
-            console.log(cyan + "Version : " +pckjson.version + reset);
-            break
-        }
-        default :
-            console.log(red + "Command not found" + reset);
+// parsing valid arguments
+switch ((args[0] as string).toLowerCase()) {
+    case "version":
+    case "--version":
+    case "-v": {
+        console.log(cyan + "Version : " + pckjson.version + reset);
+        break
     }
+    case "install":
+    case "i": {
+
+        let cmd = "";
+
+        // case check for yarn
+        if (args.indexOf("-y") !== -1 || args.indexOf("yarn") !== -1) {
+
+            cmd = "yarn add " + tilde;
+
+            // case check for debug on yarn
+            if (args.indexOf("-d") !== -1 || args.indexOf("dev") !== -1)
+                cmd = cmd + " -D";
+        }
+        // case check for debug on npm
+        else if (args.indexOf("-d") !== -1 || args.indexOf("dev") !== -1)
+            cmd = "npm install --save-dev " + tilde;
+        else
+            cmd = "npm install " + tilde;
+
+        // run the command
+        command(cmd);
+
+        break
+    }
+    default :
+        console.log(red + "Command not found" + reset);
 }
 
+/**
+ * spawn a new process
+ */
+function command(cmd) {
+    const child = spawn(cmd, {stdio: 'inherit', shell: true});
+    child.on('exit', () => {
+        return
+    });
 
+    child.on('error', err => {
+        console.log(err);
+        return
+    })
+
+}

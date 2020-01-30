@@ -89,6 +89,20 @@ switch ((args[0] as string).toLowerCase()) {
 
         break
     }
+    case "uninstall":
+    case "remove":{
+
+        let cmd = "";
+
+        if (args.indexOf("-y") !== -1 || args.indexOf("yarn") !== -1)
+            cmd = 'yarn remove "~"';
+        else
+            cmd = 'npm uninstall "~"';
+
+        // run the command
+        command(cmd);
+        break
+    }
     default :
         console.log(red + "Command not found" + reset);
 }

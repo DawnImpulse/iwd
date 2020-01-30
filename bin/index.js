@@ -32,7 +32,8 @@ var child_process_1 = require("child_process");
 // reading package.json file
 var pckjson = JSON.parse(fs_1.readFileSync(path_1.resolve(__dirname, "..", "package.json"), 'utf-8'));
 // tilde git url
-var tilde = "git://github.com/dawnimpulse/tilde";
+var tilde = "https://github.com/dawnimpulse/tilde.git#";
+var tildeVersion = "0.9.0";
 // various color codes without using libraries
 var reset = "\x1b[0m";
 var red = "\x1b[31m";
@@ -41,6 +42,7 @@ var yellow = "\x1b[33m";
 var blue = "\x1b[34m";
 var magenta = "\x1b[35m";
 var cyan = "\x1b[36m";
+var dim = "\x1b[2m";
 // parsing arguments in args
 var args = [];
 process.argv.forEach(function (el, i) {
@@ -60,16 +62,17 @@ switch (args[0].toLowerCase()) {
         var cmd = "";
         // case check for yarn
         if (args.indexOf("-y") !== -1 || args.indexOf("yarn") !== -1) {
-            cmd = "yarn add " + tilde;
+            cmd = "yarn add ";
             // case check for debug on yarn
             if (args.indexOf("-d") !== -1 || args.indexOf("dev") !== -1)
-                cmd = cmd + " -D";
+                cmd = cmd + "--dev ";
+            cmd += tilde + tildeVersion;
         }
         // case check for debug on npm
         else if (args.indexOf("-d") !== -1 || args.indexOf("dev") !== -1)
-            cmd = "npm install --save-dev " + tilde;
+            cmd = "npm install --save-dev " + tilde + tildeVersion;
         else
-            cmd = "npm install " + tilde;
+            cmd = "npm install " + tilde + tildeVersion;
         // run the command
         command(cmd);
         break;
@@ -81,12 +84,13 @@ switch (args[0].toLowerCase()) {
  * spawn a new process
  */
 function command(cmd) {
+    console.log(dim + "Running command " + cyan + cmd + reset);
     var child = child_process_1.spawn(cmd, { stdio: 'inherit', shell: true });
-    child.on('exit', function () {
+    child.on('exit', function (code) {
         return;
     });
     child.on('error', function (err) {
-        console.log(err);
+        console.log(red + err + reset);
         return;
     });
 }

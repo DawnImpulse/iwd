@@ -34,7 +34,8 @@ import {spawn} from "child_process";
 const pckjson = JSON.parse(readFileSync(resolve(__dirname, "..", "package.json"), 'utf-8'));
 
 // tilde git url
-const tilde = "git://github.com/dawnimpulse/tilde";
+const tilde = "https://github.com/dawnimpulse/tilde.git#";
+const tildeVersion = "0.9.0";
 
 // various color codes without using libraries
 const reset = "\x1b[0m";
@@ -44,6 +45,7 @@ const yellow = "\x1b[33m";
 const blue = "\x1b[34m";
 const magenta = "\x1b[35m";
 const cyan = "\x1b[36m";
+const dim = "\x1b[2m";
 
 // parsing arguments in args
 const args = [];
@@ -68,17 +70,19 @@ switch ((args[0] as string).toLowerCase()) {
         // case check for yarn
         if (args.indexOf("-y") !== -1 || args.indexOf("yarn") !== -1) {
 
-            cmd = "yarn add " + tilde;
+            cmd = "yarn add ";
 
             // case check for debug on yarn
             if (args.indexOf("-d") !== -1 || args.indexOf("dev") !== -1)
-                cmd = cmd + " -D";
+                cmd = cmd + "--dev ";
+
+            cmd += tilde + tildeVersion;
         }
         // case check for debug on npm
         else if (args.indexOf("-d") !== -1 || args.indexOf("dev") !== -1)
-            cmd = "npm install --save-dev " + tilde;
+            cmd = "npm install --save-dev " + tilde + tildeVersion;
         else
-            cmd = "npm install " + tilde;
+            cmd = "npm install " + tilde + tildeVersion;
 
         // run the command
         command(cmd);
@@ -93,13 +97,14 @@ switch ((args[0] as string).toLowerCase()) {
  * spawn a new process
  */
 function command(cmd) {
+    console.log(dim + "Running command " + cyan + cmd + reset);
     const child = spawn(cmd, {stdio: 'inherit', shell: true});
-    child.on('exit', () => {
+    child.on('exit', (code) => {
         return
     });
 
     child.on('error', err => {
-        console.log(err);
+        console.log(red + err + reset);
         return
     })
 

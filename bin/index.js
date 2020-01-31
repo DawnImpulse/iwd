@@ -42,60 +42,66 @@ var yellow = "\x1b[33m";
 var blue = "\x1b[34m";
 var magenta = "\x1b[35m";
 var cyan = "\x1b[36m";
-var dim = "\x1b[2m";
+var white = "\x1b[37m";
 // parsing arguments in args
 var args = [];
 process.argv.forEach(function (el, i) {
     if (i > 1)
         args.push(el.toLowerCase());
 });
-// parsing valid arguments
-switch (args[0].toLowerCase()) {
-    case "version":
-    case "--version":
-    case "-v": {
-        console.log(cyan + "Version : " + pckjson.version + reset);
-        break;
-    }
-    case "install":
-    case "i": {
-        var cmd = "";
-        // case check for yarn
-        if (args.indexOf("-y") !== -1 || args.indexOf("yarn") !== -1) {
-            cmd = "yarn add ";
-            // case check for debug on yarn
-            if (args.indexOf("-d") !== -1 || args.indexOf("dev") !== -1)
-                cmd = cmd + "--dev ";
-            cmd += tilde + tildeVersion;
+if (args[0] === undefined)
+    help();
+else
+    // parsing valid arguments
+    switch (args[0].toLowerCase()) {
+        case "version":
+        case "--version":
+        case "-v": {
+            console.log(cyan + "Version : " + pckjson.version + reset);
+            break;
         }
-        // case check for debug on npm
-        else if (args.indexOf("-d") !== -1 || args.indexOf("dev") !== -1)
-            cmd = "npm install --save-dev " + tilde + tildeVersion;
-        else
-            cmd = "npm install " + tilde + tildeVersion;
-        // run the command
-        command(cmd);
-        break;
+        case "install":
+        case "i": {
+            var cmd = "";
+            // case check for yarn
+            if (args.indexOf("-y") !== -1 || args.indexOf("yarn") !== -1) {
+                cmd = "yarn add ";
+                // case check for debug on yarn
+                if (args.indexOf("-d") !== -1 || args.indexOf("dev") !== -1)
+                    cmd = cmd + "--dev ";
+                cmd += tilde + tildeVersion;
+            }
+            // case check for debug on npm
+            else if (args.indexOf("-d") !== -1 || args.indexOf("dev") !== -1)
+                cmd = "npm install --save-dev " + tilde + tildeVersion;
+            else
+                cmd = "npm install " + tilde + tildeVersion;
+            // run the command
+            command(cmd);
+            break;
+        }
+        case "uninstall":
+        case "remove": {
+            var cmd = "";
+            if (args.indexOf("-y") !== -1 || args.indexOf("yarn") !== -1)
+                cmd = 'yarn remove "~"';
+            else
+                cmd = 'npm uninstall "~"';
+            // run the command
+            command(cmd);
+            break;
+        }
+        case "options":
+        case "help":
+        case "-h":
+        default:
+            help();
     }
-    case "uninstall":
-    case "remove": {
-        var cmd = "";
-        if (args.indexOf("-y") !== -1 || args.indexOf("yarn") !== -1)
-            cmd = 'yarn remove "~"';
-        else
-            cmd = 'npm uninstall "~"';
-        // run the command
-        command(cmd);
-        break;
-    }
-    default:
-        console.log(red + "Command not found" + reset);
-}
 /**
  * spawn a new process
  */
 function command(cmd) {
-    console.log(dim + "Running command " + cyan + cmd + reset);
+    console.log(white + "Running command " + cyan + cmd + reset);
     var child = child_process_1.spawn(cmd, { stdio: 'inherit', shell: true });
     child.on('exit', function (code) {
         return;
@@ -104,5 +110,20 @@ function command(cmd) {
         console.log(red + err + reset);
         return;
     });
+}
+/**
+ * used to display help menu
+ */
+function help() {
+    //const v = Number(process.version.match(^v(\d+\.\d+)/)[1]);
+    console.log("");
+    console.log(cyan + " option " + yellow + "|" + cyan + " description" + reset);
+    console.log("");
+    console.log(" i, install " + yellow + "|" + reset + " install the `~` package ");
+    console.log(" uninstall, remove " + yellow + "|" + reset + " remove the `~` package ");
+    console.log(" -h, help, options " + yellow + "|" + reset + " used to display all available options ");
+    console.log(" -v, version " + yellow + "|" + reset + " version of `iwd` package ");
+    console.log(" -y, yarn " + yellow + "|" + reset + " used in conjunction with `i` command to use yarn while installing `~` package ");
+    console.log(" -d, dev " + yellow + "|" + reset + " use to install the `~` package as a dev dependency ");
 }
 //# sourceMappingURL=index.js.map

@@ -80,7 +80,7 @@ else
             command(cmd);
             break;
         }
-        case "uninstall":
+        case "r":
         case "remove": {
             var cmd = "";
             if (args.indexOf("-y") !== -1 || args.indexOf("yarn") !== -1)
@@ -120,7 +120,7 @@ function help() {
     console.log(cyan + " option " + yellow + "|" + cyan + " description" + reset);
     console.log("");
     console.log(" i, install " + yellow + "|" + reset + " install the `~` package ");
-    console.log(" uninstall, remove " + yellow + "|" + reset + " remove the `~` package ");
+    console.log(" r, remove " + yellow + "|" + reset + " remove the `~` package ");
     console.log(" -h, help, options " + yellow + "|" + reset + " used to display all available options ");
     console.log(" -v, version " + yellow + "|" + reset + " version of `iwd` package ");
     console.log(" -y, yarn " + yellow + "|" + reset + " used in conjunction with `i` command to use yarn while installing `~` package ");

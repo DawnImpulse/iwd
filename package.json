@@ -5,6 +5,7 @@
   "main": "index.js",
   "files": [
     "LICENSE.txt",
+    "README.md",
     "package.json",
     "bin/index.js"
   ],

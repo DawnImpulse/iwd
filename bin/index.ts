@@ -34,7 +34,7 @@ import {spawn} from "child_process";
 const pckjson = JSON.parse(readFileSync(resolve(__dirname, "..", "package.json"), 'utf-8'));
 
 // tilde git url
-const tilde = "https://github.com/dawnimpulse/tilde.git#";
+const tilde = "https://github.com/dawnimpulse/tilde.git";
 const tildeVersion = "0.9.0";
 
 // various color codes without using libraries

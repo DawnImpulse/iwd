@@ -15,7 +15,7 @@ yarn global add prwd
 prwd install
 ```
 > Installation can use either yarn or npm
-> Checkout various option below before proceding further
+> Checkout various option below before proceeding further
 ### Usage
 It is very simple to access root directory via using `~/~`  Example :
 
@@ -33,7 +33,7 @@ With `~/~/` you get access to your project's root directory and then you can sim
 | i, install | install the `~` package. `prwd i` |
 | r, remove | remove the `~` package. `prwd r` |
 | -h, help, options | used to display all available options. `prwd -h` |
-| -v, version | version of `iwd` package. `prwd -v` |
+| -v, version | version of `prwd` package. `prwd -v` |
 | -y, yarn | used in conjunction with `i` command to use yarn while installing `~` package. `prwd i -y`|
 | -d, dev | use to install the `~` package as a dev dependency. `prwd i -d` or `prwd i -y -d`|
 

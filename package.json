@@ -1,5 +1,5 @@
 {
-  "name": "iwd",
+  "name": "prwd",
   "version": "0.9.0",
   "description": "accessing root directory in require & import calls using ~",
   "main": "index.js",
@@ -23,13 +23,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dawnimpulse/iwd.git"
+    "url": "git+https://github.com/dawnimpulse/prwd.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dawnimpulse/iwd/issues"
+    "url": "https://github.com/dawnimpulse/prwd/issues"
   },
-  "homepage": "https://github.com/dawnimpulse/iwd#readme"
+  "homepage": "https://github.com/dawnimpulse/prwd#readme"
 }

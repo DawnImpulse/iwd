@@ -10,7 +10,7 @@
     "bin/index.js"
   ],
   "bin": {
-    "iwd": "bin/index.js"
+    "prwd": "bin/index.js"
   },
   "dependencies": {},
   "devDependencies": {

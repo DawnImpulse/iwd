@@ -1,18 +1,18 @@
-# iwd
+# prwd
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
-**Initial Working Directory** is used for accessing project root in node require and import calls via `~/~`
+**Package Root Working Directory** is used for accessing package root in node require and import calls via `~/~`
 
 ### Installation
-- Install `iwd` package as global module
+- Install `prwd` package as global module
 ```
-npm i -g iwd
+npm i -g prwd
 // or
-yarn global add iwd
+yarn global add prwd
 ```
-- Installing `~` package via `iwd`
+- Installing `~` package via `prwd`
 ```
-iwd install
+prwd install
 ```
 > Installation can use either yarn or npm
 > Checkout various option below before proceding further
@@ -30,12 +30,12 @@ With `~/~/` you get access to your project's root directory and then you can sim
 
 | Option | Description |
 |--|--|
-| i, install | install the `~` package. `iwd i` |
-| r, remove | remove the `~` package. `iwd r` |
-| -h, help, options | used to display all available options. `iwd -h` |
-| -v, version | version of `iwd` package. `iwd -v` |
-| -y, yarn | used in conjunction with `i` command to use yarn while installing `~` package. `iwd i -y`|
-| -d, dev | use to install the `~` package as a dev dependency. `iwd i -d` or `iwd i -y -d`|
+| i, install | install the `~` package. `prwd i` |
+| r, remove | remove the `~` package. `prwd r` |
+| -h, help, options | used to display all available options. `prwd -h` |
+| -v, version | version of `iwd` package. `prwd -v` |
+| -y, yarn | used in conjunction with `i` command to use yarn while installing `~` package. `prwd i -y`|
+| -d, dev | use to install the `~` package as a dev dependency. `prwd i -d` or `prwd i -y -d`|
 
 ### Contact  
   

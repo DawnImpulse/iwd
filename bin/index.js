@@ -32,7 +32,7 @@ var child_process_1 = require("child_process");
 // reading package.json file
 var pckjson = JSON.parse(fs_1.readFileSync(path_1.resolve(__dirname, "..", "package.json"), 'utf-8'));
 // tilde git url
-var tilde = "https://github.com/dawnimpulse/tilde.git#";
+var tilde = "https://github.com/dawnimpulse/tilde.git";
 var tildeVersion = "0.9.0";
 // various color codes without using libraries
 var reset = "\x1b[0m";

@@ -17,7 +17,7 @@
 
 /*
 
-@info - main entry point for iwd commands
+@info - main entry point for prwd commands
 
 @author Saksham
 @note Last Branch Update - master
@@ -34,7 +34,7 @@ import {spawn} from "child_process";
 const pckjson = JSON.parse(readFileSync(resolve(__dirname, "..", "package.json"), 'utf-8'));
 
 // tilde git url
-const tilde = "https://github.com/dawnimpulse/tilde.git";
+const tilde = "https://github.com/dawnimpulse/tilde.git#";
 const tildeVersion = "0.9.0";
 
 // various color codes without using libraries
@@ -141,7 +141,7 @@ function help() {
     console.log(" i, install " + yellow + "|" + reset + " install the `~` package ");
     console.log(" r, remove " + yellow + "|" + reset + " remove the `~` package ");
     console.log(" -h, help, options " + yellow + "|" + reset + " used to display all available options ");
-    console.log(" -v, version " + yellow + "|" + reset + " version of `iwd` package ");
+    console.log(" -v, version " + yellow + "|" + reset + " version of `prwd` package ");
     console.log(" -y, yarn " + yellow + "|" + reset + " used in conjunction with `i` command to use yarn while installing `~` package ");
     console.log(" -d, dev " + yellow + "|" + reset + " use to install the `~` package as a dev dependency ");
 }
